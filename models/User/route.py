@@ -27,6 +27,7 @@ user_bp = Blueprint('user', __name__, url_prefix='/users')
                     'email': {'type': 'string', 'format': 'email', 'example': 'john.doe@example.com'},
                     'password': {'type': 'string', 'format': 'password', 'example': 'a_strong_password'},
                     'blood_type': {'type': 'string', 'example': 'O+'},
+                    'gender': {'type': 'string', 'example': 'male'},
                     'location': {'type': 'string', 'example': 'New York'}
                 }
             }
@@ -54,7 +55,8 @@ def create_user():
         name=data['name'],
         email=data['email'],
         blood_type=data['blood_type'],
-        location=data.get('location')
+        location=data.get('location'),
+        gender= data.get('gender')
     )
     new_user.set_password(data['password'])
 

@@ -1,7 +1,7 @@
 import os
 from flask import Blueprint, request, jsonify
-from flask_jwt_extended import create_access_token
-from models.User.model import User
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
+from models.User.model import User # Assuming User model is in models/User/model.py
 from flasgger import swag_from
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
@@ -53,3 +53,88 @@ def login():
         return jsonify(access_token=access_token, user=user.to_dict()), 200
     
     return jsonify({"msg": "Bad email or password"}), 401
+
+@auth_bp.route("/register", methods=["POST"])
+@swag_from({
+    'tags': ['Auth'],
+    'parameters': [
+        {
+            'in': 'body',
+            'name': 'body',
+            'required': True,
+            'schema': {
+                'id': 'UserRegistration',
+                'required': ['email', 'password', 'name', 'blood_type', 'location'],
+                'properties': {
+                    'email': {'type': 'string', 'format': 'email', 'example': 'jane.doe@example.com'},
+                    'password': {'type': 'string', 'format': 'password', 'example': 'another_strong_password'},
+                    'name': {'type': 'string', 'example': 'Jane Doe'},
+                    'blood_type': {'type': 'string', 'example': 'A+'},
+                    'gender': {'type': 'string', 'example': 'female'},
+                    'location': {'type': 'string', 'example': 'City, Country'}
+                }
+            }
+        }
+    ],
+    'responses': {
+        201: {
+            'description': 'User registered successfully',
+            'schema': {
+                '$ref': '#/definitions/User'
+            }
+        },
+        400: {
+            'description': 'Invalid input'
+        },
+        409: {
+            'description': 'Email already registered'
+        }
+    }
+})
+def register():
+    data = request.get_json()
+    # Basic validation - you might want more robust validation
+    if not all(key in data for key in ('email', 'password', 'name', 'blood_type', 'location')):
+        return jsonify({"msg": "Missing required fields"}), 400
+
+    if User.query.filter_by(email=data['email']).first():
+        return jsonify({"msg": "Email already registered"}), 409
+
+    new_user = User(
+        email=data['email'],
+        name=data['name'],
+        blood_type=data['blood_type'],
+        gender = data['gender'],
+        location=data['location']
+    )
+    new_user.set_password(data['password']) # Assuming you have a set_password method
+
+    # Assuming you have a db object and add/commit methods
+    from database import db # Assuming db object is in database.py
+    db.session.add(new_user)
+    db.session.commit()
+
+    return jsonify(new_user.to_dict()), 201 # Assuming you have a to_dict method
+
+@auth_bp.route("/logout", methods=["POST"])
+@jwt_required() # Requires a valid JWT token
+@swag_from({
+    'tags': ['Auth'],
+    'security': [{'jwt': []}], # Indicates this endpoint requires JWT authentication
+    'responses': {
+        200: {
+            'description': 'Successfully logged out'
+        },
+        401: {
+            'description': 'Missing or invalid token'
+        }
+    }
+})
+def logout():
+    # JWT is handled by the @jwt_required() decorator.
+    # On the client side, you would simply discard the token.
+    # If you have a token blocklist, you would add the token here.
+    jti = get_jwt_identity() # Get the identity from the token if needed
+    print(f"User {jti} logged out") # Log the logout event
+
+    return jsonify({"msg": "Successfully logged out"}), 200

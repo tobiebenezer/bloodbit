@@ -9,6 +9,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(256), nullable=False)
     blood_type = db.Column(db.String(3), nullable=False)
     location = db.Column(db.String(120), nullable=True)
+    gender = db.Column(db.String(10), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow, nullable=False)
     
@@ -29,6 +30,7 @@ class User(db.Model):
             'email': self.email,
             'blood_type': self.blood_type,
             'location': self.location,
+            'gender': self.gender,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
             'donations': self.donations.count(),
