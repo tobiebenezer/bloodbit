@@ -45,6 +45,7 @@ def create_app(config_overrides=None):
 
     return app
 
+app = create_app() # Call create_app at the top level to make 'app' available for import
+
 if __name__ == "__main__":
-    app = create_app()
     app.run(debug=True)
