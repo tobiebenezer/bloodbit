@@ -1,0 +1,11 @@
+Flask
+psycopg2-binary
+python-dotenv
+flasgger
+pydantic
+email-validator
+Flask-SQLAlchemy
+gunicorn
+Flask-JWT-Extended
+pytest-watch
+Flask-Migrate
