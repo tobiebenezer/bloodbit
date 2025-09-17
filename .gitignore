@@ -1,4 +1,4 @@
 .env
 venv/
 .idx/
-*/__pychache__/
+*/__pycache__
