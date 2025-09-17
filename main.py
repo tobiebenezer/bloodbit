@@ -34,16 +34,7 @@ def create_app(config_overrides=None):
     swagger_config = {
         "headers": [
         ],
-        "specs": [
-            # {
-            #     "version": "0.0.1",
-            #     "title": "Api v1",
-            #     "endpoint": 'v1_spec',
-            #     "route": '/v1/spec',
-            #     "rule_filter": lambda rule: True,  # all in
-            #     "model_filter": lambda tag: True,  # all in
-            # }
-        ],
+       
         "static_url_path": "/flasgger_static",
         # Swagger UI static files will be served here
         "swagger_ui": True,
