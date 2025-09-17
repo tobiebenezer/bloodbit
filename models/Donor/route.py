@@ -153,6 +153,7 @@ def create_donor():
             'required': True,
             'schema': {
                 'id': 'DonorUpdate',
+                'type': 'object',
                 'properties': {
                     'medical_history': {'type': 'string'},
                     'is_available': {'type': 'boolean'},
