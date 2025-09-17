@@ -36,14 +36,16 @@ def create_app(config_overrides=None):
         ],
         "specs": [
             {
-                "endpoint": 'apispec_1',
-                "route": '/apispec_1.json',
+                "version": "0.0.1",
+                "title": "Api v1",
+                "endpoint": 'v1_spec',
+                "route": '/v1/spec',
                 "rule_filter": lambda rule: True,  # all in
                 "model_filter": lambda tag: True,  # all in
             }
         ],
         "static_url_path": "/flasgger_static",
-        # swagger ui static files will be served here
+        # Swagger UI static files will be served here
         "swagger_ui": True,
         "specs_route": "/apidocs/",
         "definitions": {
