@@ -21,6 +21,7 @@ blood_request_bp = Blueprint('blood-request', __name__, url_prefix='/blood-reque
             }
         }
     },
+    'security': [{'BearerAuth': []}],
     'parameters': [
         {
             'name': 'donor_id',
@@ -66,6 +67,7 @@ def get_blood_requests():
 @jwt_required()
 @swag_from({
     'tags': ['Blood Request'],
+    'security': [{'BearerAuth': []}],
     'parameters': [
         {
             'name': 'id',
@@ -96,6 +98,7 @@ def get_blood_request(id):
 @jwt_required()
 @swag_from({
     'tags': ['Blood Request'],
+    'security': [{'BearerAuth': []}],
     'parameters': [
         {
             'in': 'body',
@@ -144,6 +147,7 @@ def create_blood_request():
 @jwt_required()
 @swag_from({
     'tags': ['Blood Request'],
+    'security': [{'BearerAuth': []}],
     'parameters': [
         {
             'name': 'id',

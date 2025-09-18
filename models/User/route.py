@@ -9,6 +9,7 @@ user_bp = Blueprint('user', __name__, url_prefix='/users')
 @user_bp.route('/', methods=['POST'])
 @swag_from({
     'tags': ['User'],
+    'security': [{'BearerAuth': []}],
     'parameters': [
         {
             'name': 'body',
@@ -94,6 +95,7 @@ def get_users():
 @jwt_required()
 @swag_from({
     'tags': ['User'],
+    'security': [{'BearerAuth': []}],
     'parameters': [
         {
             'name': 'user_id',

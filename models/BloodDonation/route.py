@@ -12,6 +12,7 @@ blood_donation_bp = Blueprint('blood_donation', __name__, url_prefix='/blood-don
 @jwt_required()
 @swag_from({
     'tags': ['Blood Donation'],
+    'security': [{'BearerAuth': []}],
     'parameters': [
         {
             'name': 'Authorization',
@@ -93,6 +94,7 @@ def get_blood_donations():
 @jwt_required()
 @swag_from({
     'tags': ['Blood Donation'],
+    'security': [{'BearerAuth': []}],
     'parameters': [
         {
             'name': 'donation_id',

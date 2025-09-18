@@ -38,6 +38,14 @@ def create_app(config_overrides=None):
         "static_url_path": "/flasgger_static",
         "swagger_ui": True,
         "specs_route": "/apidocs/",
+        'securityDefinitions': {
+            'BearerAuth': {
+                'type': 'apiKey',
+                'name': 'Authorization',
+                'in': 'header',
+                'description': 'Enter Bearer token in the format: Bearer <token>'
+            }
+        },
         "definitions": {
             "User": {
                 "type": "object",

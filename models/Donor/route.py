@@ -11,6 +11,7 @@ donor_bp = Blueprint('donor_bp', __name__, url_prefix='/donors')
 @jwt_required()
 @swag_from({
     'tags': ['Donor'],
+    'security': [{'BearerAuth': []}],
     'parameters': [
         {
             'name': 'blood_group',
@@ -69,6 +70,7 @@ def get_donors():
 @jwt_required()
 @swag_from({
     'tags': ['Donor'],
+    'security': [{'BearerAuth': []}],
     'parameters': [
         {
             'name': 'id',
@@ -99,6 +101,7 @@ def get_donor(id):
 @jwt_required()
 @swag_from({
     'tags': ['Donor'],
+    'security': [{'BearerAuth': []}],
     'parameters': [
         {
             'in': 'body',
@@ -140,7 +143,9 @@ def create_donor():
 @jwt_required()
 @swag_from({
     'tags': ['Donor'],
+    'security': [{'BearerAuth': []}],
     'parameters': [
+        
         {
             'name': 'id',
             'in': 'path',

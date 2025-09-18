@@ -1,5 +1,6 @@
 .env
 venv/
+.venv/
 .idx/
 __pycache__/
 .idx

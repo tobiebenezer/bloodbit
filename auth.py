@@ -11,7 +11,9 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 @swag_from({
     'tags': ['Auth'],
     'parameters': [
+        
         {
+            
             'in': 'body',
             'name': 'body',
             'required': True,
@@ -120,7 +122,16 @@ def register():
 @jwt_required() # Requires a valid JWT token
 @swag_from({
     'tags': ['Auth'],
-    'security': [{'jwt': []}], # Indicates this endpoint requires JWT authentication
+    'security': [{'jwt': []}],
+    'parameters': [
+        {
+            'name': 'Authorization',
+            'in': 'header',
+            'type': 'string',
+            'required': True,
+            'description': 'Bearer token for authentication (e.g., "Bearer <token>")'
+        },
+    ],
     'responses': {
         200: {
             'description': 'Successfully logged out'
