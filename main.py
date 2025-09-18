@@ -50,6 +50,18 @@ def create_app(config_overrides=None):
                     "gender": {"type": "string"}
                 }
             },
+            "Donor": {
+                "type": "object",
+                "properties": {
+                    "id": {"type": "integer"},
+                    "user": {"$ref": "#/definitions/User"},
+                    "medical_history": {"type": "string"},
+                    "is_available": {"type": "boolean"},
+                    "last_donation": {"type": "string", "format": "date-time"},
+                    "created_at": {"type": "string", "format": "date-time"},
+                    "updated_at": {"type": "string", "format": "date-time"}
+                }
+            },
             "BloodRequest": {
                 "type": "object",
                 "properties": {
