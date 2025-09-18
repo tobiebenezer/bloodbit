@@ -158,6 +158,7 @@ def create_blood_request():
             'required': True,
             'schema': {
                 'id': 'BloodRequestUpdate',
+                'type': 'object',
                 'properties': {
                     'donor_id': {'type': 'string', 'nullable': True},
                     'status': {'type': 'string'}
