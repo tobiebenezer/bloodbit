@@ -1,9 +1,8 @@
-
 from flask import Flask
 from flasgger import Swagger
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
-from extensions import db
+from database import db
 from auth import auth_bp
 from models.User.route import user_bp
 from models.Donor.route import donor_bp
