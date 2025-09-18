@@ -15,7 +15,6 @@ user_bp = Blueprint('user', __name__, url_prefix='/users')
             'in': 'body',
             'required': True,
             'schema': {
-                'id': 'UserRegistration',
                 'type': 'object',
                 'required': [
                     'name',

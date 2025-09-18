@@ -23,25 +23,25 @@ blood_request_bp = Blueprint('blood-request', __name__, url_prefix='/blood-reque
     },
     'parameters': [
         {
- 'name': 'donor_id',
- 'in': 'query',
- 'type': 'string',
- 'required': False,
- 'description': 'Filter requests by donor ID'
+            'name': 'donor_id',
+            'in': 'query',
+            'type': 'string',
+            'required': False,
+            'description': 'Filter requests by donor ID'
         },
         {
- 'name': 'requester_id',
- 'in': 'query',
- 'type': 'string',
- 'required': False,
- 'description': 'Filter requests by requester ID'
+            'name': 'requester_id',
+            'in': 'query',
+            'type': 'string',
+            'required': False,
+            'description': 'Filter requests by requester ID'
         },
         {
- 'name': 'blood_type',
- 'in': 'query',
- 'type': 'string',
- 'required': False,
- 'description': 'Filter requests by blood type'
+            'name': 'blood_type',
+            'in': 'query',
+            'type': 'string',
+            'required': False,
+            'description': 'Filter requests by blood type'
         }
     ]
 }
@@ -102,7 +102,6 @@ def get_blood_request(id):
             'name': 'body',
             'required': True,
             'schema': {
-                'id': 'BloodRequestInput',
                 'required': ['blood_type', 'quantity', 'location'],
                 'properties': {
                     'blood_type': {'type': 'string'},
@@ -157,7 +156,6 @@ def create_blood_request():
             'name': 'body',
             'required': True,
             'schema': {
-                'id': 'BloodRequestUpdate',
                 'type': 'object',
                 'properties': {
                     'donor_id': {'type': 'string', 'nullable': True},

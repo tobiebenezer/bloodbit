@@ -16,7 +16,6 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
             'name': 'body',
             'required': True,
             'schema': {
-                'id': 'UserLogin',
                 'type': 'object',
                 'required': ['email', 'password'],
                 'properties': {
@@ -66,7 +65,6 @@ def login():
             'name': 'body',
             'required': True,
             'schema': {
-                'id': 'UserRegistration',
                 'type': 'object',
                 'required': ['email', 'password', 'name', 'blood_type', 'location'],
                 'properties': {

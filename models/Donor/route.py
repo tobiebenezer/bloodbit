@@ -105,7 +105,6 @@ def get_donor(id):
             'name': 'body',
             'required': True,
             'schema': {
-                'id': 'DonorInput',
                 'type': 'object',
                 'required': ['medical_history'],
                 'properties': {
@@ -153,7 +152,6 @@ def create_donor():
             'name': 'body',
             'required': True,
             'schema': {
-                'id': 'DonorUpdate',
                 'type': 'object',
                 'properties': {
                     'medical_history': {'type': 'string'},
