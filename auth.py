@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 from models.User.model import User # Assuming User model is in models/User/model.py
 from flasgger import swag_from
+from database import db
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -16,6 +17,7 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
             'required': True,
             'schema': {
                 'id': 'UserLogin',
+                'type': 'object',
                 'required': ['email', 'password'],
                 'properties': {
                     'email': {'type': 'string', 'format': 'email', 'example': 'john.doe@example.com'},
@@ -28,6 +30,7 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
         200: {
             'description': 'Login successful',
             'schema': {
+                'type': 'object',
                 'properties': {
                     'access_token': {'type': 'string'},
                     'user': {
@@ -64,6 +67,7 @@ def login():
             'required': True,
             'schema': {
                 'id': 'UserRegistration',
+                'type': 'object',
                 'required': ['email', 'password', 'name', 'blood_type', 'location'],
                 'properties': {
                     'email': {'type': 'string', 'format': 'email', 'example': 'jane.doe@example.com'},
@@ -109,8 +113,6 @@ def register():
     )
     new_user.set_password(data['password']) # Assuming you have a set_password method
 
-    # Assuming you have a db object and add/commit methods
-    from database import db # Assuming db object is in database.py
     db.session.add(new_user)
     db.session.commit()
 

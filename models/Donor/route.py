@@ -106,6 +106,7 @@ def get_donor(id):
             'required': True,
             'schema': {
                 'id': 'DonorInput',
+                'type': 'object',
                 'required': ['medical_history'],
                 'properties': {
                     'medical_history': {'type': 'string'},
