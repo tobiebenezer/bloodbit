@@ -74,6 +74,7 @@ def create_user():
 @jwt_required()
 @swag_from({
     'tags': ['User'],
+    'security': [{'BearerAuth': []}],
     'responses': {
         200: {
             'description': 'A list of users',

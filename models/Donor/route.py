@@ -109,7 +109,7 @@ def get_donor(id):
             'required': True,
             'schema': {
                 'type': 'object',
-                'required': ['medical_history'],
+                'optional': ['medical_history', 'is_available', 'last_donation'],
                 'properties': {
                     'medical_history': {'type': 'string'},
                     'is_available': {'type': 'boolean'},
@@ -131,9 +131,9 @@ def create_donor():
     data = request.get_json()
     new_donor = Donor(
         user_id=int(get_jwt_identity()),
-        medical_history=data.get('medical_history'),
+        medical_history=data.get('medical_history', ''),
         is_available=data.get('is_available', True),
-        last_donation=data.get('last_donation')
+        last_donation=data.get('last_donation', None)
     )
     db.session.add(new_donor)
     db.session.commit()
@@ -158,6 +158,7 @@ def create_donor():
             'required': True,
             'schema': {
                 'type': 'object',
+                'optional': ['medical_history', 'is_available', 'last_donation'],
                 'properties': {
                     'medical_history': {'type': 'string'},
                     'is_available': {'type': 'boolean'},
