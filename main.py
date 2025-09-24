@@ -8,9 +8,11 @@ from models.User.route import user_bp
 from models.Donor.route import donor_bp
 from models.BloodRequest.route import blood_request_bp
 from models.User.model import User
+from flask_cors import CORS
 
 def create_app(config_overrides=None):
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object('config.Config')
 
     if config_overrides:
